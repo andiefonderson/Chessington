@@ -20,5 +20,12 @@ namespace Chessington.GameEngine.Pieces
             var currentSquare = board.FindPiece(this);
             board.MovePiece(currentSquare, newSquare);
         }
+        public void AddNewPositionToList(List<Square> posList, Square newPos, Square currentPos)
+        {
+            if (newPos != currentPos)
+            {
+                posList.Add(newPos);
+            }
+        }
     }
 }

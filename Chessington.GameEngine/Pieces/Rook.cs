@@ -15,12 +15,14 @@ namespace Chessington.GameEngine.Pieces
 
             for (int i = 0; i < 8; i++)
             {
-                moves.Add(Square.At(currentPos.Row, i));
+                Square newPos = Square.At(currentPos.Row, i);
+                AddNewPositionToList(moves, newPos, currentPos);
             }
 
             for (int i = 0; i < 8; i++)
             {
-                moves.Add(Square.At(i, currentPos.Col));
+                Square newPos = Square.At(i, currentPos.Col);
+                AddNewPositionToList(moves, newPos, currentPos);
             }
 
             return moves;
