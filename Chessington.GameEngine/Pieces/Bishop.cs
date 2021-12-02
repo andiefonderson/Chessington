@@ -13,28 +13,7 @@ namespace Chessington.GameEngine.Pieces
             List<Square> moves = new List<Square>();
             Square currentPos = board.FindPiece(this);
 
-            int minNum = currentPos.Row > currentPos.Col ? currentPos.Col : currentPos.Row;
-            int maxNum = currentPos.Row < currentPos.Col ? currentPos.Col : currentPos.Row;
-
-            for (int i = 0; i <= minNum; i++)
-            {
-                Square newPos = Square.At(currentPos.Row - i, currentPos.Col - i);
-                AddNewPositionToList(moves, newPos, currentPos);
-            }
-
-            for (int i = 0; i < maxNum; i++)
-            {
-                Square newPos = Square.At(currentPos.Row + i, currentPos.Col + i);
-                AddNewPositionToList(moves, newPos, currentPos);
-                Square newPos2 = Square.At(currentPos.Row + i, currentPos.Col - i);
-                AddNewPositionToList(moves, newPos2, currentPos);
-            }
-
-            for (int i = 0; i < minNum; i++)
-            {
-                Square newPos = Square.At(currentPos.Row - i, currentPos.Col + i);
-                AddNewPositionToList(moves, newPos, currentPos);
-            }
+            DiagonalMovement(moves, currentPos);
 
             return moves;
         }

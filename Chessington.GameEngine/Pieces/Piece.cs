@@ -27,5 +27,46 @@ namespace Chessington.GameEngine.Pieces
                 posList.Add(newPos);
             }
         }
+
+        public void LateralMovement(List<Square> moves, Square currentPos)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                Square newPos = Square.At(currentPos.Row, i);
+                AddNewPositionToList(moves, newPos, currentPos);
+            }
+
+            for (int i = 0; i < 8; i++)
+            {
+                Square newPos = Square.At(i, currentPos.Row);
+                AddNewPositionToList(moves,newPos,currentPos);
+            }
+        }
+
+        public void DiagonalMovement(List<Square> moves, Square currentPos)
+        {
+            int minNum = currentPos.Row > currentPos.Col ? currentPos.Col : currentPos.Row;
+            int maxNum = currentPos.Row < currentPos.Col ? currentPos.Col : currentPos.Row;
+
+            for (int i = 0; i <= minNum; i++)
+            {
+                Square newPos = Square.At(currentPos.Row - i, currentPos.Col - i);
+                AddNewPositionToList(moves, newPos, currentPos);
+            }
+
+            for (int i = 0; i < maxNum; i++)
+            {
+                Square newPos = Square.At(currentPos.Row + i, currentPos.Col + i);
+                AddNewPositionToList(moves, newPos, currentPos);
+                Square newPos2 = Square.At(currentPos.Row + i, currentPos.Col - i);
+                AddNewPositionToList(moves, newPos2, currentPos);
+            }
+
+            for (int i = 0; i < minNum; i++)
+            {
+                Square newPos = Square.At(currentPos.Row - i, currentPos.Col + i);
+                AddNewPositionToList(moves, newPos, currentPos);
+            }
+        }
     }
 }

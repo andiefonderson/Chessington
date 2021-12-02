@@ -13,17 +13,7 @@ namespace Chessington.GameEngine.Pieces
             Square currentPos = board.FindPiece(this);
             List<Square> moves = new List<Square>();
 
-            for (int i = 0; i < 8; i++)
-            {
-                Square newPos = Square.At(currentPos.Row, i);
-                AddNewPositionToList(moves, newPos, currentPos);
-            }
-
-            for (int i = 0; i < 8; i++)
-            {
-                Square newPos = Square.At(i, currentPos.Col);
-                AddNewPositionToList(moves, newPos, currentPos);
-            }
+            LateralMovement(moves, currentPos);
 
             return moves;
         }
