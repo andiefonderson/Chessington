@@ -38,34 +38,34 @@ namespace Chessington.GameEngine.Pieces
 
             for (int i = 0; i < 8; i++)
             {
-                Square newPos = Square.At(i, currentPos.Row);
+                Square newPos = Square.At(i, currentPos.Col);
                 AddNewPositionToList(moves,newPos,currentPos);
             }
         }
 
         public void DiagonalMovement(List<Square> moves, Square currentPos)
         {
-            int minNum = currentPos.Row > currentPos.Col ? currentPos.Col : currentPos.Row;
-            int maxNum = currentPos.Row < currentPos.Col ? currentPos.Col : currentPos.Row;
-
-            for (int i = 0; i <= minNum; i++)
+            for (int i = 0; i < 8; i++)
             {
                 Square newPos = Square.At(currentPos.Row - i, currentPos.Col - i);
-                AddNewPositionToList(moves, newPos, currentPos);
-            }
+                CheckIfWithinBounds(newPos, moves, currentPos);
 
-            for (int i = 0; i < maxNum; i++)
-            {
-                Square newPos = Square.At(currentPos.Row + i, currentPos.Col + i);
-                AddNewPositionToList(moves, newPos, currentPos);
+                Square newPos1 = Square.At(currentPos.Row + i, currentPos.Col + i);
+                CheckIfWithinBounds(newPos1, moves, currentPos);
+
                 Square newPos2 = Square.At(currentPos.Row + i, currentPos.Col - i);
-                AddNewPositionToList(moves, newPos2, currentPos);
-            }
+                CheckIfWithinBounds(newPos2, moves, currentPos);
 
-            for (int i = 0; i < minNum; i++)
+                Square newPos3 = Square.At(currentPos.Row - i, currentPos.Col + i);
+                CheckIfWithinBounds(newPos3, moves, currentPos);      
+            }
+        }
+
+        private void CheckIfWithinBounds(Square pos, List<Square> moves, Square currentPos)
+        {
+            if(pos.Row >= 0 && pos.Row <= 7 && pos.Col >= 0 && pos.Col <= 7)
             {
-                Square newPos = Square.At(currentPos.Row - i, currentPos.Col + i);
-                AddNewPositionToList(moves, newPos, currentPos);
+                AddNewPositionToList(moves, pos, currentPos);
             }
         }
     }

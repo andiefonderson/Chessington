@@ -28,6 +28,14 @@ namespace Chessington.GameEngine.Pieces
             moves.Add(Square.At(currentPos.Row - 1, currentPos.Col - 2));
             moves.Add(Square.At(currentPos.Row - 1, currentPos.Col + 2));
             moves.Add(Square.At(currentPos.Row + 1, currentPos.Col - 2));
+
+            foreach (Square move in moves)
+            {
+                if(currentPos.Row < 0 || currentPos.Col < 0 || currentPos.Row > 7 || currentPos.Col > 7)
+                {
+                    moves.Remove(move);
+                }
+            }
         }
     }
 }
